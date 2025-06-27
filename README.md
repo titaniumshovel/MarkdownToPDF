@@ -37,7 +37,14 @@ npm start
 
 To create a desktop executable for your platform:
 
-**Windows:**
+**Windows (Recommended method):**
+```bash
+npm run package-win
+```
+
+The executable will be created in the `dist/markdown-to-pdf-win32-x64` folder. You can find `markdown-to-pdf.exe` there.
+
+**Alternative method (if you have admin privileges):**
 ```bash
 npm run build-win
 ```
@@ -51,8 +58,6 @@ npm run build-mac
 ```bash
 npm run build-linux
 ```
-
-The executable will be created in the `dist` folder.
 
 ## Usage
 
