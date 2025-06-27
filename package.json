@@ -1,0 +1,41 @@
+{
+  "name": "markdown-to-pdf-converter",
+  "version": "1.0.0",
+  "description": "Professional Markdown to PDF Converter",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux"
+  },
+  "keywords": ["markdown", "pdf", "converter"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "marked": "^11.1.1"
+  },
+  "build": {
+    "appId": "com.yourcompany.markdowntopdf",
+    "productName": "Markdown to PDF",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}
