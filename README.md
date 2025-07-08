@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/icon.png" alt="Markdown to PDF Converter Icon" width="128" height="128">
-</p>
-
 # Markdown to PDF Converter
 
 A professional desktop application for converting Markdown documents to beautifully styled PDFs. Perfect for creating client-ready documents with a clean, professional appearance.
