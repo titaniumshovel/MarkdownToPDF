@@ -33,14 +33,17 @@
     },
     "win": {
       "target": "portable",
+      "icon": "assets/icon.png",
       "publisherName": "Your Company",
       "verifyUpdateCodeSignature": false
     },
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon": "assets/icon.png"
     },
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "icon": "assets/icon.png"
     },
     "nsis": {
       "oneClick": false,

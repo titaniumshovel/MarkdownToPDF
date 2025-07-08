@@ -7,6 +7,9 @@ const convertBtn = document.getElementById('convertBtn');
 const fileName = document.getElementById('fileName');
 const notification = document.getElementById('notification');
 
+// Check if running in Electron
+const isElectron = window.electronAPI !== undefined;
+
 // Configure marked options for better rendering
 marked.setOptions({
     breaks: true,
@@ -29,11 +32,34 @@ markdownInput.addEventListener('input', () => {
 
 // Handle file upload
 uploadBtn.addEventListener('click', async () => {
-    const result = await window.electronAPI.openFileDialog();
-    if (result.success) {
-        markdownInput.value = result.content;
-        fileName.textContent = `File: ${result.fileName}`;
-        updatePreview();
+    if (isElectron) {
+        // Electron environment - use native file dialog
+        const result = await window.electronAPI.openFileDialog();
+        if (result.success) {
+            markdownInput.value = result.content;
+            fileName.textContent = `File: ${result.fileName}`;
+            updatePreview();
+        }
+    } else {
+        // Web environment - use HTML file input
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.md,.markdown';
+        
+        input.onchange = async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    markdownInput.value = event.target.result;
+                    fileName.textContent = `File: ${file.name}`;
+                    updatePreview();
+                };
+                reader.readAsText(file);
+            }
+        };
+        
+        input.click();
     }
 });
 
@@ -46,13 +72,33 @@ clearBtn.addEventListener('click', () => {
 
 // Convert to PDF
 convertBtn.addEventListener('click', async () => {
-    const htmlContent = generatePDFHTML();
-    const result = await window.electronAPI.generatePDF(htmlContent);
-    
-    if (result.success) {
-        showNotification(`PDF saved successfully to: ${result.filePath}`, 'success');
+    if (isElectron) {
+        // Electron environment - use native PDF generation
+        const htmlContent = generatePDFHTML();
+        const result = await window.electronAPI.generatePDF(htmlContent);
+        
+        if (result.success) {
+            showNotification(`PDF saved successfully to: ${result.filePath}`, 'success');
+        } else {
+            showNotification('Failed to save PDF. Please try again.', 'error');
+        }
     } else {
-        showNotification('Failed to save PDF. Please try again.', 'error');
+        // Web environment - use browser print dialog
+        const htmlContent = generatePDFHTML();
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(htmlContent);
+        printWindow.document.close();
+        
+        // Wait for content to load then trigger print
+        printWindow.onload = () => {
+            printWindow.print();
+            // Close the window after a delay to ensure print dialog appears
+            setTimeout(() => {
+                printWindow.close();
+            }, 1000);
+        };
+        
+        showNotification('Use the print dialog to save as PDF (select "Save as PDF" as printer)', 'success');
     }
 });
 

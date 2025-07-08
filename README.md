@@ -121,9 +121,14 @@ This document outlines our **comprehensive solution** for your business needs.
 
 To customize the PDF styling, edit the CSS in `renderer.js` within the `generatePDFHTML()` function.
 
-### Application Icon
+## Web Deployment
 
-Replace `assets/icon.png` with your own icon (512x512 pixels recommended).
+This application can also be deployed as a web app (like on GitHub Pages). When running in a browser:
+- File upload uses the browser's file input dialog
+- PDF generation uses the browser's print dialog (select "Save as PDF" as the printer)
+- All other features work the same way
+
+Live demo: https://titaniumshovel.github.io/MarkdownToPDF/
 
 ## Troubleshooting
 
