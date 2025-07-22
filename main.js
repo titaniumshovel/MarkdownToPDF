@@ -5,6 +5,9 @@ const fs = require('fs').promises;
 let mainWindow;
 
 function createWindow() {
+  // Set custom user data directory to avoid cache permission issues
+  app.setPath('userData', path.join(__dirname, 'user-data'));
+  
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,

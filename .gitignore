@@ -5,6 +5,7 @@ node_modules/
 dist/
 build/
 out/
+user-data/
 
 # IDE files
 .vscode/
@@ -12,6 +13,7 @@ out/
 *.swp
 *.swo
 *~
+CLAUDE.md
 
 # OS files
 .DS_Store
