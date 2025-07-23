@@ -163,21 +163,25 @@ function generatePDFHTML() {
     <meta charset="UTF-8">
     <style>
         @page {
-            margin: 1in;
             size: A4;
+            margin: 0.75in;
+            orphans: 3;
+            widows: 3;
         }
         
         body {
             margin: 0;
-            padding: 1in;
-            max-width: 8.5in;
+            padding: 0;
+            font-family: inherit;
+            line-height: inherit;
         }
         
         .pdf-preview {
-            max-width: 8.5in;
-            margin: 0 auto;
+            max-width: none;
+            margin: 0;
             padding: 0;
             background: white;
+            width: 100%;
         }
         
         /* Base styles for ${selectedStyle} */
@@ -196,21 +200,21 @@ function generatePDFHTML() {
 // Get CSS for specific style
 function getStyleCSS(style) {
     const baseStyles = `
-        .pdf-preview { max-width: 8.5in; margin: 0 auto; padding: 0; background: white; }
+        .pdf-preview { max-width: none; margin: 0; padding: 0; background: white; width: 100%; }
     `;
     
     if (style === 'professional') {
         return baseStyles + `
         .pdf-preview.professional { font-family: Georgia, 'Times New Roman', serif; font-size: 12pt; line-height: 1.6; color: #000000; }
-        .pdf-preview.professional h1 { font-size: 24pt; font-weight: bold; color: #000000; margin: 36pt 0 18pt 0; page-break-before: always; page-break-after: avoid; border-bottom: 2pt solid #000000; padding-bottom: 6pt; text-align: left; }
-        .pdf-preview.professional h2 { font-size: 18pt; font-weight: bold; color: #000000; margin: 24pt 0 12pt 0; page-break-before: auto; page-break-after: avoid; border-bottom: 1pt solid #666666; padding-bottom: 3pt; }
-        .pdf-preview.professional h3 { font-size: 14pt; font-weight: bold; color: #000000; margin: 18pt 0 9pt 0; page-break-after: avoid; }
-        .pdf-preview.professional h4 { font-size: 12pt; font-weight: bold; color: #000000; margin: 15pt 0 6pt 0; page-break-after: avoid; }
-        .pdf-preview.professional h5, .pdf-preview.professional h6 { font-size: 11pt; font-weight: bold; color: #000000; margin: 12pt 0 6pt 0; page-break-after: avoid; }
+        .pdf-preview.professional h1 { font-size: 24pt; font-weight: bold; color: #000000; margin: 36pt 0 18pt 0; page-break-after: avoid; page-break-inside: avoid; border-bottom: 2pt solid #000000; padding-bottom: 6pt; text-align: left; orphans: 3; widows: 3; }
+        .pdf-preview.professional h2 { font-size: 18pt; font-weight: bold; color: #000000; margin: 24pt 0 12pt 0; page-break-before: auto; page-break-after: avoid; page-break-inside: avoid; border-bottom: 1pt solid #666666; padding-bottom: 3pt; orphans: 3; widows: 3; }
+        .pdf-preview.professional h3 { font-size: 14pt; font-weight: bold; color: #000000; margin: 18pt 0 9pt 0; page-break-after: avoid; page-break-inside: avoid; orphans: 3; widows: 3; }
+        .pdf-preview.professional h4 { font-size: 12pt; font-weight: bold; color: #000000; margin: 15pt 0 6pt 0; page-break-after: avoid; page-break-inside: avoid; orphans: 3; widows: 3; }
+        .pdf-preview.professional h5, .pdf-preview.professional h6 { font-size: 11pt; font-weight: bold; color: #000000; margin: 12pt 0 6pt 0; page-break-after: avoid; page-break-inside: avoid; orphans: 3; widows: 3; }
         .pdf-preview.professional p { margin: 0 0 12pt 0; text-align: justify; text-indent: 0; orphans: 3; widows: 3; }
         .pdf-preview.professional a { color: #000000; text-decoration: underline; }
         .pdf-preview.professional code { font-family: 'Courier New', 'Consolas', monospace; font-size: 10pt; background-color: #f5f5f5; padding: 2pt 4pt; border: 1pt solid #e0e0e0; }
-        .pdf-preview.professional pre { font-family: 'Courier New', 'Consolas', monospace; font-size: 10pt; background-color: #f9f9f9; border: 1pt solid #d0d0d0; padding: 12pt; margin: 12pt 0; page-break-inside: avoid; white-space: pre-wrap; word-wrap: break-word; }
+        .pdf-preview.professional pre { font-family: 'Courier New', 'Consolas', monospace; font-size: 10pt; background-color: #f9f9f9; border: 1pt solid #d0d0d0; padding: 12pt; margin: 12pt 0; page-break-inside: avoid; white-space: pre-wrap; word-wrap: break-word; text-decoration: none; }
         .pdf-preview.professional blockquote { margin: 12pt 0 12pt 36pt; padding: 0 0 0 18pt; border-left: 3pt solid #cccccc; font-style: italic; color: #555555; page-break-inside: avoid; }
         .pdf-preview.professional ul, .pdf-preview.professional ol { margin: 12pt 0; padding-left: 36pt; }
         .pdf-preview.professional li { margin: 6pt 0; line-height: 1.5; }
@@ -231,7 +235,7 @@ function getStyleCSS(style) {
         .pdf-preview.academic p { margin: 0 0 12pt 0; text-align: justify; text-indent: 18pt; }
         .pdf-preview.academic a { color: #000000; text-decoration: none; }
         .pdf-preview.academic code { font-family: 'Courier New', monospace; font-size: 9pt; background-color: #f8f8f8; padding: 1pt 3pt; }
-        .pdf-preview.academic pre { font-family: 'Courier New', monospace; font-size: 9pt; background-color: #f8f8f8; border: 1pt solid #ccc; padding: 9pt; margin: 12pt 0; page-break-inside: avoid; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; }
+        .pdf-preview.academic pre { font-family: 'Courier New', monospace; font-size: 9pt; background-color: #f8f8f8; border: 1pt solid #ccc; padding: 9pt; margin: 12pt 0; page-break-inside: avoid; white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word; text-decoration: none; }
         .pdf-preview.academic blockquote { margin: 12pt 0 12pt 36pt; font-style: italic; }
         .pdf-preview.academic ul, .pdf-preview.academic ol { margin: 6pt 0; padding-left: 24pt; }
         .pdf-preview.academic li { margin: 3pt 0; }
@@ -251,7 +255,7 @@ function getStyleCSS(style) {
         .pdf-preview.modern p { margin: 0 0 15pt 0; text-align: left; }
         .pdf-preview.modern a { color: #3498db; text-decoration: none; }
         .pdf-preview.modern code { font-family: 'Monaco', 'Menlo', monospace; font-size: 10pt; background-color: #ecf0f1; padding: 3pt 6pt; border-radius: 3pt; }
-        .pdf-preview.modern pre { font-family: 'Monaco', 'Menlo', monospace; font-size: 10pt; background-color: #2c3e50; color: #ecf0f1; padding: 15pt; margin: 18pt 0; border-radius: 6pt; }
+        .pdf-preview.modern pre { font-family: 'Monaco', 'Menlo', monospace; font-size: 10pt; background-color: #2c3e50; color: #ecf0f1; padding: 15pt; margin: 18pt 0; border-radius: 6pt; text-decoration: none; }
         .pdf-preview.modern pre code { background-color: transparent; color: inherit; padding: 0; }
         .pdf-preview.modern blockquote { margin: 18pt 0; padding: 12pt 18pt; background-color: #ecf0f1; border-left: 4pt solid #3498db; font-style: normal; }
         .pdf-preview.modern ul, .pdf-preview.modern ol { margin: 12pt 0; padding-left: 24pt; }

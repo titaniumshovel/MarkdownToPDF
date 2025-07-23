@@ -217,7 +217,7 @@ header h1 {
 .pdf-preview {
     max-width: 8.5in;
     margin: 0 auto;
-    padding: 1in;
+    padding: 0.75in;
     background: white;
 }
 
@@ -251,11 +251,13 @@ header h1 {
     font-weight: bold;
     color: #000000;
     margin: 36pt 0 18pt 0;
-    page-break-before: always;
     page-break-after: avoid;
+    page-break-inside: avoid;
     border-bottom: 2pt solid #000000;
     padding-bottom: 6pt;
     text-align: left;
+    orphans: 3;
+    widows: 3;
 }
 
 .pdf-preview.professional h2 {
@@ -265,8 +267,11 @@ header h1 {
     margin: 24pt 0 12pt 0;
     page-break-before: auto;
     page-break-after: avoid;
+    page-break-inside: avoid;
     border-bottom: 1pt solid #666666;
     padding-bottom: 3pt;
+    orphans: 3;
+    widows: 3;
 }
 
 .pdf-preview.professional h3 {
@@ -275,6 +280,9 @@ header h1 {
     color: #000000;
     margin: 18pt 0 9pt 0;
     page-break-after: avoid;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
 }
 
 .pdf-preview.professional h4 {
@@ -283,6 +291,9 @@ header h1 {
     color: #000000;
     margin: 15pt 0 6pt 0;
     page-break-after: avoid;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
 }
 
 .pdf-preview.professional h5 {
@@ -291,6 +302,9 @@ header h1 {
     color: #000000;
     margin: 12pt 0 6pt 0;
     page-break-after: avoid;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
 }
 
 .pdf-preview.professional h6 {
@@ -299,6 +313,9 @@ header h1 {
     color: #000000;
     margin: 9pt 0 6pt 0;
     page-break-after: avoid;
+    page-break-inside: avoid;
+    orphans: 3;
+    widows: 3;
 }
 
 /* Professional Body Text */
@@ -336,6 +353,7 @@ header h1 {
     page-break-inside: avoid;
     white-space: pre-wrap;
     word-wrap: break-word;
+    text-decoration: none;
 }
 
 .pdf-preview.professional pre code {
@@ -343,6 +361,7 @@ header h1 {
     border: none;
     padding: 0;
     font-size: inherit;
+    text-decoration: none;
 }
 
 /* Professional Blockquotes */

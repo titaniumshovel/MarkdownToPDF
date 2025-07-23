@@ -87,17 +87,11 @@ ipcMain.handle('generate-pdf', async (event, htmlContent) => {
 
       // Generate PDF with professional settings
       const pdfData = await pdfWindow.webContents.printToPDF({
-        marginsType: 0,
+        marginsType: 1, // Use minimal margins, let CSS handle the rest
         pageSize: 'A4',
         printBackground: true,
         landscape: false,
-        scaleFactor: 100,
-        margins: {
-          top: 0.75,
-          bottom: 0.75,
-          left: 0.75,
-          right: 0.75
-        }
+        scaleFactor: 100
       });
 
       // Save the PDF
